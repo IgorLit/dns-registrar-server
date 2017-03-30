@@ -76,7 +76,7 @@ app.use('/api',function(req, res, next) {
     };
     next();
 });
-app.set('port', (process.env.PORT || 5021));
+app.set('port', (process.env.PORT || 3000));
 dbcontext.sequelize
     .sync()
     .then(() => {
