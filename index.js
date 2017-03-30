@@ -76,10 +76,10 @@ app.use('/api',function(req, res, next) {
     };
     next();
 });
-
+app.set('port', (process.env.PORT || 5021));
 dbcontext.sequelize
     .sync()
     .then(() => {
-        app.listen(3000, () => console.log('Running on http://localhost:3000'));
+        app.listen(app.get('port'), () => console.log('Running on' + app.get('port')));
     })
     .catch((err) => console.log(err));
