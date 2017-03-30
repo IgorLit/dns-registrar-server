@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 module.exports = (authService, config) => {
     const router = express.Router();
 
-    router.post('/', (req, res) => {
+    router.get('/', (req, res) => {
         authService.login(req.body)
             .then((userId) => {
                 let token = jwt.sign({ __user_id: userId }, 'shhhhh');
@@ -14,7 +14,7 @@ module.exports = (authService, config) => {
             .catch((err) => res.error(err));
     });
 
-    router.put('/', (req, res) => {
+    router.post('/', (req, res) => {
         authService.register(req.body)
             .then((user) => res.json(user))
             .catch((err) => res.error(err));
