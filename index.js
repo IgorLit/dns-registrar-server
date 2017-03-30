@@ -78,6 +78,7 @@ app.use('/api',function(req, res, next) {
 });
 app.set('port', (process.env.PORT || 3000));
 global.isProduction = process.env.NODE_ENV === 'production';
+console.log(process.env.NODE_ENV);
 dbcontext.sequelize
     .sync()
     .then(() => {
