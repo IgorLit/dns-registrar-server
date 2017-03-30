@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (Sequelize, config) => {
-    const dbConfig = global.isProduction ? config.prod : config.db;
+    const dbConfig = process.env.NODE_ENV === 'production' ? config.prod : config.db;
     const options = {
         host: dbConfig.host,
         dialect: dbConfig.dialect,
