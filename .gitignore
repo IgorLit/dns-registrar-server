@@ -1,11 +1,8 @@
+.idea/*
 # Logs
 logs
 *.log
 npm-debug.log*
-
-
-.idea/
-node_modules/
 
 # Runtime data
 pids
