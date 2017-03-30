@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (Sequelize, config) => {
     const options = {
-        host: config.prod.host,
-        dialect: config.prod.dialect,
+        host: config.db.host,
+        dialect: config.db.dialect,
         logging: false,
         define: {
             timestamps: true,
@@ -15,7 +15,7 @@ module.exports = (Sequelize, config) => {
         }
     };
 
-    const sequelize = new Sequelize(config.prod.name, config.prod.user, config.prod.password, options);
+    const sequelize = new Sequelize(config.db.name, config.db.user, config.db.password, options);
     const User = require('../models/user')(Sequelize, sequelize);
     const Domain = require('../models/domain')(Sequelize, sequelize);
 

@@ -5,7 +5,7 @@ module.exports = (authService, config) => {
     const router = express.Router();
 
     router.get('/', (req, res) => {
-        authService.login(req.body)
+        authService.login(req.query)
             .then((userId) => {
                 let token = jwt.sign({ __user_id: userId }, 'shhhhh');
                 res.cookie('x-access-token',token);
