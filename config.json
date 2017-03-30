@@ -1,0 +1,20 @@
+{
+  "db": {
+    "host": "127.0.0.1",
+    "name": "REST",
+    "user": "root",
+    "password": "root"
+  },
+  "prod": {
+    "host": "ec2-50-17-220-223.compute-1.amazonaws.com",
+    "name": "dfg0pi4n5ltktn",
+    "user": "yilcavaezgjdxj",
+    "password": "12ea05a2680744eb807e80d102ff6571ab1b98eae9578383159a67559a74fece",
+    "dialect": "postgres"
+  },
+  "env": "dev",
+  "cookie": {
+    "key": "secret key",
+    "auth": "__user_id"
+  }
+}
