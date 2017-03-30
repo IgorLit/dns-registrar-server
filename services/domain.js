@@ -29,7 +29,7 @@ module.exports = (domainRepository, userRepository, errors) => {
                 self.baseCreate(domain)
                     .then((domain) => {
                         resolve(domain)
-                    }).catch((err)=>reject(err));
+                    }).catch((err) => reject(err));
             });
         }
 
@@ -85,34 +85,31 @@ module.exports = (domainRepository, userRepository, errors) => {
             return new Promise((resolve, reject) => {
 
                 if (tokenUserId) {
-                    jwt.verify(tokenUserId, 'shhhhh', function (err, decoded) {
-                        if (err != null) reject(errors.Unauthorized);
-                        var userId = decoded.__user_id;
+                    var userId = decoded.__user_id;
 
-                        var domain = {
-                            status: "paid"
-                        };
-                        Promise.all([
-                            domainRepository.findById(id),
-                            userRepository.findById(userId)
-                        ]).spread((dmn, user) => {
-                            if (dmn.status == "paid")
-                                reject({status: "domain already use"});
-                            console.log(dmn.id);
-                            return Promise.all([
-                                user.addDomain(dmn),
-                                user.decrement({cache: 20}),
-                                self.baseUpdate(dmn.id, {
-                                    name: dmn.name,
-                                    status: "paid"
-                                })
-                            ]);
-                        }).spread((domain, user, dmn) => {
-                            if (user.cache - 20 < 0) reject(errors.PaymentRequired)  //TODO: 20 - price for domen. move to confif
-                            resolve({success: true})
-                        })
-                            .catch(reject);
+                    var domain = {
+                        status: "paid"
+                    };
+                    Promise.all([
+                        domainRepository.findById(id),
+                        userRepository.findById(userId)
+                    ]).spread((dmn, user) => {
+                        if (dmn.status == "paid")
+                            reject({status: "domain already use"});
+                        console.log(dmn.id);
+                        return Promise.all([
+                            user.addDomain(dmn),
+                            user.decrement({cache: 20}),
+                            self.baseUpdate(dmn.id, {
+                                name: dmn.name,
+                                status: "paid"
+                            })
+                        ]);
+                    }).spread((domain, user, dmn) => {
+                        if (user.cache - 20 < 0) reject(errors.PaymentRequired);
+                        resolve({success: true})
                     })
+                        .catch(reject);
                 }
                 else {
                     reject(errors.Unauthorized)

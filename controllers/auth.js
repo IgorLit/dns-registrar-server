@@ -14,7 +14,7 @@ module.exports = (authService, config) => {
             .catch((err) => res.error(err));
     });
 
-    router.post('/', (req, res) => {
+    router.put('/', (req, res) => {
         authService.register(req.body)
             .then((user) => res.json(user))
             .catch((err) => res.error(err));
