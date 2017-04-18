@@ -15,7 +15,6 @@ module.exports = (domainRepository, userRepository, errors) => {
         let self = this;
 
         self.create = create;
-        self.update = update;
         self.check = check;
         self.pay = pay;
 
@@ -28,21 +27,7 @@ module.exports = (domainRepository, userRepository, errors) => {
                 self.baseCreate(domain)
                     .then((domain) => {
                         resolve(domain)
-                    }).catch((err)=>reject(err));
-            });
-        }
-
-        function update(data) {
-            return new Promise((resolve, reject) => {
-                let post = {
-                    title: data.title,
-                    content: data.content,
-                    date: data.date,
-                    draft: data.draft
-                };
-
-                self.baseUpdate(data.id, post)
-                    .then(resolve).catch(reject);
+                    }).catch((err) => reject(err));
             });
         }
 
@@ -56,13 +41,14 @@ module.exports = (domainRepository, userRepository, errors) => {
                     uri: 'https://api.domainr.com/v2/status?domain=' + domain + '&client_id=fb7aca826b084569a50cfb3157e924ae',
                     method: 'get'
                 }, function (err, response, body) {
-                    if ((JSON.parse(body).status[0].summary === "inactive") || (JSON.parse(body).status[0].summary === "undelegated")) {
+                    if(!JSON.parse(body).errors)
+                    if ( ( (JSON.parse(body).status[0].summary === "inactive") || (JSON.parse(body).status[0].summary === "undelegated")) ) {
                         domainRepository.findAll(
                             {
                                 where: {name: domain}
                             })
                             .then((domain) => {
-                                if (domain.length != 0) {
+                                if (domain.length && (domain.length > 0)) {
                                     resolve({status: "domain already use"})
 
                                 }
@@ -95,9 +81,8 @@ module.exports = (domainRepository, userRepository, errors) => {
                             domainRepository.findById(id),
                             userRepository.findById(userId)
                         ]).spread((dmn, user) => {
-                            if (dmn.status == "paid")
+                            if (dmn.status === "paid")
                                 reject({status: "domain already use"});
-                            console.log(dmn.id);
                             return Promise.all([
                                 user.addDomain(dmn),
                                 user.decrement({cache: 20}),

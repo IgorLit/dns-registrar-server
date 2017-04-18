@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 
-express.response.error = function(error) {
+express.response.error = function (error) {
     if (!error.code) {
         error = {
             message: error.toString(),
@@ -34,7 +34,7 @@ module.exports = {
         code: 'access_denied',
         status: 403
     },
-        Unauthorized: {
+    Unauthorized: {
         message: 'Unauthorized',
         code: 'unauthorized',
         status: 401
