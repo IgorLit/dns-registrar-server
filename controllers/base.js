@@ -59,6 +59,12 @@ function BaseController(service, promiseHandler) {
             }
         }
     }
+
+    this.readAll = readAll;
+    this.read = read;
+    this.create = create;
+    this.del = del;
+    this.update = update;
 }
 
 module.exports = BaseController;

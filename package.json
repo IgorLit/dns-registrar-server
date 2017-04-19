@@ -19,7 +19,8 @@
     "xml": "^1.0.1"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "engines": {
     "node": "6.9.4"

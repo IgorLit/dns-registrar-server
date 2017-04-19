@@ -21,7 +21,6 @@ module.exports = (domainService, cacheService, config, promiseHandler) => {
         this.routes['/'] = [{method: 'get', cb: readAll}, {method: 'post', cb: registerDomain}];
         this.routes['/:id'] = [{method: 'put', cb: pay}, {method: 'get', cb: readById}];
         this.routes['/avaliable/:domain'] = [{method: 'get', cb: check}];
-        // this.routes['/pay'] = [];
 
         this.registerRoutes();
 
