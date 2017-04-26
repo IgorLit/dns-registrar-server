@@ -19,7 +19,7 @@ describe('Test set for Service.Base', () => {
             expect(typeof Base).toBe('function');
         });
 
-        test('Should created object', () => {
+        test('Should create object', () => {
             expect(typeof service).toBe('object');
         });
     });
@@ -37,7 +37,7 @@ describe('Test set for Service.Base', () => {
             expect(records).toEqual(data);
         });
 
-        it('Should use deault values', async () => {
+        it('Should use default values', async () => {
             await service.readChunk();
             await service.readChunk({ limit: 100 });
             await service.readChunk({ page: 3 });
@@ -129,7 +129,7 @@ describe('Test set for Service.Base', () => {
                  .toBeInstanceOf(Promise);
          });
 
-         it('Should created object', async () => {
+         it('Should create object', async () => {
              let record =
                  await service.baseCreate(data[42]);
 
@@ -149,7 +149,7 @@ describe('Test set for Service.Base', () => {
                  .toBeInstanceOf(Promise);
          });
 
-         it('Should updated object', async () => {
+         it('Should update object', async () => {
              let record = await service.baseUpdate(42,data[42]);
 
              expect(repository.update).toHaveBeenCalled();
@@ -166,11 +166,11 @@ describe('Test set for Service.Base', () => {
      });
 
      describe('>> Deleting', () => {
-         it('должно возвращать promise', () => {
+         it('Should returned promise', () => {
              expect(service.delete())
                  .toBeInstanceOf(Promise);
          });
-         it('должно удалять объект', async () => {
+         it('Should delete object', async () => {
              let result = await service.delete(42);
 
              expect(repository.destroy).toHaveBeenCalled();

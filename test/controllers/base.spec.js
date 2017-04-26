@@ -19,7 +19,7 @@ describe('Test set for Controller.Base', () => {
             expect(typeof BaseController).toBe('function');
         });
 
-        test('Should created object', () => {
+        test('Should create object', () => {
             expect(typeof baseController).toBe('object');
         });
 
