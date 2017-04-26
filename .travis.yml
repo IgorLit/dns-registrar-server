@@ -1,6 +1,8 @@
 language: node_js
 notifications:
   email:
+  recipients:
+        - igorek96by@gmail.com
     on_success: never
     on_failure: change
 node_js:
