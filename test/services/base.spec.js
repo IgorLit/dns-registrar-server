@@ -16,7 +16,7 @@ describe('Test set for Service.Base', () => {
 
     describe('>> Module', () => {
         test('Should imported function', () => {
-            expect(typeof Base).toBe('function');
+            expect(typeof Base3).toBe('function');
         });
 
         test('Should create object', () => {
