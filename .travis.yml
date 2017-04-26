@@ -1,10 +1,10 @@
 language: node_js
 notifications:
   email:
-  recipients:
-        - igorek96by@gmail.com
-    on_success: never
-    on_failure: change
+    recipients:
+      -  igorek96by@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
 node_js:
   - "6.9.5"
 before_script:
